@@ -1,11 +1,17 @@
 {
+  // Refer to https://docs.npmjs.com/files/package.json for the format
   "name": "pegadroid-sample-nodeapp",
   "version": "1.0.0",
   "description": "Sample hyperledger fabric node app",
-  "main": "index.js",
+  "main": "pegadroid-sample-nodeapp",
+  "keywords":[],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Saurabh Tiwari <saurabh.x.tiwari@gmail.com>",
-  "license": "ISC"
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saurabhxtiwari/pegadroid-sample-nodeapp"
+  }
 }

@@ -7,5 +7,4 @@ All rights reserved
 
 'use strict';
 
-var express = require("express");
-var exports = module.exports = {};
+module.exports = require("./lib/tobenamed.js");
