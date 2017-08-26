@@ -1,0 +1,6 @@
+{
+    "software": true,
+    "keysize":256,
+    "algorithm":"EC",
+    "hash":"SHA2"
+}
