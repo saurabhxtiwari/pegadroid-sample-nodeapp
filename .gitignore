@@ -1,3 +1,1 @@
-./node-modules
-./lib/msp/keystore/*
-./lib/msp/statestore/*
+node-modules
