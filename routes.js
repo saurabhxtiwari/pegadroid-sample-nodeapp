@@ -22,6 +22,7 @@ server.use(restifyPlugin.jsonBodyParser({ mapParams: true }))
 server.use(restifyPlugin.acceptParser(server.acceptable))
 server.use(restifyPlugin.queryParser({ mapParams: true }))
 server.use(restifyPlugin.fullResponse())
+server.pre(restify.pre.sanitizePath());
 
 server.listen(config.port)
 
@@ -62,6 +63,30 @@ server.get("/queryChaincodes", function(req, res, next){
     res.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
     var handler = new networkHandler()
     handler.queryChaincodes()
+    .then(
+        (response) => {
+            res.end(JSON.stringify(response))
+            return next()
+        }
+    )
+})
+
+server.get("/createChannel/:channelName", function(req, res, next){
+    res.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
+    var handler = new networkHandler()
+    handler.createChannel(req.params.channelName)
+    .then(
+        (response) => {
+            res.end(JSON.stringify(response))
+            return next()
+        }
+    )
+})
+
+server.get("/joinChannel/:channelName", function(req, res, next){
+    res.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
+    var handler = new networkHandler()
+    handler.joinChannel(req.params.channelName, handler.peer)
     .then(
         (response) => {
             res.end(JSON.stringify(response))
