@@ -29,16 +29,7 @@ server.listen(config.port)
 server.get("/createUser", function(req, res, next){
     res.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
     var handler = new identityHandler()
-    handler.createUser({"enrollmentID": "testuser4", "enrollmentSecret":"password"})
-    .then(
-        (response) => {
-            res.end(JSON.stringify(response))
-            return next()
-        }
-    )
-
-    var handler = new networkHandler()
-    handler.queryChannels()
+    handler.createUser({"enrollmentID": "testuser4", "enrollmentSecret":"password", "role":"user", "affiliation": "pegadroid.internal"})
     .then(
         (response) => {
             res.end(JSON.stringify(response))
@@ -153,6 +144,18 @@ server.get("/invokeChaincode/:channelName/:chaincodeId/:chaincodeVersion", funct
     var peers = []
     peers.push(handler.peer)
     handler.invokeChaincode(req.params.channelName, peers, req.params.chaincodeId, req.params.chaincodeVersion)
+    .then(
+        (response) => {
+            res.end(JSON.stringify(response))
+            return next()
+        }
+    )
+})
+
+server.get("/signupNewOrg/:name/:secret", function(req, res, next){
+    res.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
+    var handler = new networkHandler()
+    handler.signupNewOrg(req.params.name, req.params.secret)
     .then(
         (response) => {
             res.end(JSON.stringify(response))
